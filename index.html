@@ -161,7 +161,8 @@
 </header>
 
 <nav>
-  <button data-tab="phenom" class="active"><span class="ic">📖</span>Φαινόμενα</button>
+  <button data-tab="home" class="active"><span class="ic">🏠</span>Αρχική</button>
+  <button data-tab="phenom"><span class="ic">📖</span>Φαινόμενα</button>
   <button data-tab="lectio"><span class="ic">📜</span>Lectio</button>
   <button data-tab="morph"><span class="ic">🔤</span>Μορφολογία</button>
   <button data-tab="exercise"><span class="ic">✍️</span>Εξάσκηση</button>
@@ -170,7 +171,21 @@
 
 <main>
 
-<section class="tab active" id="tab-phenom">
+<section class="tab active" id="tab-home">
+  <div class="card teal" style="text-align:center">
+    <h3 style="margin-bottom:2px">⏳ Αντίστροφη μέτρηση</h3>
+    <p id="homeCountdown" style="font-size:17px;font-weight:800;color:var(--teal);margin:4px 0">—</p>
+  </div>
+  <div id="homeScoreBody"></div>
+  <div id="homeWeak" style="margin-top:6px"></div>
+  <div style="display:flex;gap:8px;margin-top:14px">
+    <button class="btn got" id="homeGoExercise" style="flex:1">✍️ Εξάσκηση</button>
+    <button class="btn shaky" id="homeGoMock" style="flex:1">⏱ Mock Exam</button>
+  </div>
+  <div class="note">Η εκτίμηση επίδοσης ενημερώνεται αυτόματα κάθε φορά που απαντάς ερωτήσεις στην Εξάσκηση ή στο Mock Exam.</div>
+</section>
+
+<section class="tab" id="tab-phenom">
   <div class="filterbar" id="phenomFilters"></div>
   <div id="phenomList"></div>
   <div class="note">Το % δείχνει σε πόσα από τα 17 lectio του υλικού σου εμφανίζεται το φαινόμενο — συχνότητα στην ύλη, όχι πρόβλεψη για την εξέταση. Κάθε κάρτα έχει παράθεση πηγής. Το study4exams.gr/latin/pdf αποκλείεται ρητά από το robots.txt του site — δεν έγινε scraping εκεί.</div>
@@ -217,15 +232,23 @@
   <div id="exerciseSubtabs" class="subtabs">
     <button data-esub="practice" class="active">Εξάσκηση</button>
     <button data-esub="mock">Mock Exam</button>
+    <button data-esub="adidakto">Αδίδακτο</button>
   </div>
   <div id="exercisePracticePane">
     <select class="scopepick" id="exerciseScope"></select>
     <div id="exerciseBody"></div>
     <button class="btn show-btn" id="exerciseNext" style="width:100%;margin-top:4px">Επόμενη ερώτηση</button>
-    <div class="note">Συνδυασμός: αναγνώριση τύπων (από τη γραμματική ανάλυση κάθε lectio), συντακτικός ρόλος λέξεων (από την πραγματική συντακτική ανάλυση), αρχικοί χρόνοι ρημάτων, και μετασχηματισμός αριθμού — όλα παραγμένα από το πραγματικό υλικό σου, καμία τυχαία/AI ερώτηση.</div>
+    <div class="note">Συνδυασμός: αναγνώριση τύπων, συντακτικός ρόλος, αρχικοί χρόνοι ρημάτων, αριθμός, λεξιλόγιο, παραθετικά, τονισμός και φαινόμενα/δευτερεύουσες — όλα παραγμένα από το πραγματικό υλικό σου.</div>
   </div>
   <div id="exerciseMockPane" style="display:none">
     <div id="mockBody"></div>
+  </div>
+  <div id="exerciseAdidaktoPane" style="display:none">
+    <div id="adidaktoDir" class="subtabs">
+      <button data-adir="b9" class="active">Β9 (Λατ.→Ελλ.)</button>
+      <button data-adir="b10">Β10 (Ελλ.→Λατ.)</button>
+    </div>
+    <div id="adidaktoBody"></div>
   </div>
 </section>
 

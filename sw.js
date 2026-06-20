@@ -1,4 +1,4 @@
-const CACHE = "latin-pagkypries-v2";
+const CACHE = "latin-pagkypries-v4";
 const SHELL = ["./", "./index.html", "./app.js", "./manifest.json"];
 
 self.addEventListener("install", (e) => {
