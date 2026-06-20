@@ -1,34 +1,27 @@
-const CACHE = "latin-pagkypries-v4";
-const SHELL = ["./", "./index.html", "./app.js", "./manifest.json"];
+const CACHE = 'latina-v1';
+const ASSETS = ['./index.html','./app.js','./data.js','./ui.js','./manifest.json'];
 
-self.addEventListener("install", (e) => {
-  e.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(SHELL)).catch(()=>{})
-  );
+self.addEventListener('install', e=>{
+  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));
   self.skipWaiting();
 });
-
-self.addEventListener("activate", (e) => {
+self.addEventListener('activate', e=>{
   e.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
-    )
+    caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))
   );
   self.clients.claim();
 });
-
-self.addEventListener("fetch", (e) => {
-  if (e.request.method !== "GET") return;
+self.addEventListener('fetch', e=>{
   e.respondWith(
-    caches.match(e.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(e.request)
-        .then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE).then((cache) => cache.put(e.request, copy)).catch(()=>{});
-          return res;
-        })
-        .catch(() => cached);
+    caches.match(e.request).then(cached=>{
+      if(cached) return cached;
+      return fetch(e.request).then(res=>{
+        if(res && res.status===200 && e.request.method==='GET'){
+          const clone = res.clone();
+          caches.open(CACHE).then(c=>c.put(e.request, clone));
+        }
+        return res;
+      }).catch(()=>cached);
     })
   );
 });
